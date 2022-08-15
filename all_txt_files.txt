@@ -1,0 +1,13 @@
+1. Story files
+	
+	Story1--birth.txt
+	Story2--hometown.txt
+	...
+
+	- Writes out main story
+	- Can include simple graphics (?)
+
+2. Character files
+
+	List all characters
+	Using a different number to represent every characters

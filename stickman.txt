@@ -1,0 +1,35 @@
+---------------------------------------
+     Some creatures blocked your way!
+            Battle Start!
+---------------------------------------
+
+
+(^-^)          [^'-'^]           \{X-X}/
+doggo          cactus         unknown species  
+hp ---- 100    hp ----- 125   hp ------------- 325
+____________________________________________________
+
+hp ----- 125   hp --- 75      hp -------- 200
+atk 134        atk 345        atk 6
+mgc 445        mgc 64         mgc 999
+ (0o0)          <*_*>            w|T_T|w
+pikachu         potato            Dirk
+
+choose ur creature: potato
+choose ur target: cactus
+choose ur ability: 1. mashed potato   2. fries     3. sweet potato
+
+
+
+(^-^)       [^'-'^]       \{X-X}/
+doggo       cactus     unknown species  
+hp ----     hp -----   hp -------------
+______________________________________
+
+hp -----     hp ---       hp --------
+atk 134      atk 345      atk 6
+mgc 445      mgc 64       mgc 999
+ (0o0)        <*_*>        |T_T|
+pikachu      potato         Dirk
+
+

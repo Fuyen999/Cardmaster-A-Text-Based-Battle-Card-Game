@@ -1,0 +1,265 @@
+the battle system I thought of implementing is from a mobile card game called card wars kingdom (referred to as cwk hereafter). I played this a long time ago, it isnt famous but it is really fun to play
+the game is dead now lol cuz the developers decided not to update it and shut down its servers. You probably can't find it on play store or app store ady.
+but the game is fun tho in my opinion. It requires a certain depth of strategy instead of just keep on pressing attack like a lot rpg's battles lol. But card wars isnt an rpg, i just wanna implement its battle system.
+
+rules:
+1. A player vs another player (can be human or AI)
+
+2. Each player will have an avatar and a deck of creatures.
+
+3. Deck of creatures:
+	Getting Creatures:
+	a. There are a lot of creatures available in game, you get the creatures by opening treasure chests.
+	b. Creatures are categorised into different rarities (eg: common, rare, legendary etc.)
+	c. Rarer creatures have better features
+	d. In cwk, u earn money or gems every battle u win, then u use the money/gems to randomly pull chests off a treasure cave. There are some types of chests available. More expensive chests will have higher chance of getting a rarer creature.
+	e. In our game tho, we can make this random chest pull thing or we can just randomly give out creatures on map or give a creature as reward of winning a battle
+	
+	What Are Creatures:
+	a. The following is how cwk creatures are designed:
+	b. Each creature will have six stats: hp (health), atk (attack damage), mgc (magic damage), crt (critical damage chance), elixir cost and level
+	c. Hp is health, the creature dies in battle when health goes under 0. You will not lose the creature permanently after the creature died in battle.
+	d. Other stats will be explained in the 'battle' section
+	e. Besides the four basic stats, each creature comes with a set of 5 cards.
+	f. Each card has different uses, and the set of 5 cards is fixed (cannot be removed, changed or swapped between creatures)
+	g. Therefore if u are experienced enough in the game, when u see an opponent's creature on battlefield, u will know which card the opponent has
+	h. The creatures are at level 1 when u obtain them in chests (Each chest contains only one creature, can change tho).
+	g. U can level the creatures up by feeding them with cakes (obtained from battles) or feeding them with other useless creatures (feeding with creatures gives more xp than cakes)
+	h. Levelling up increases their hp, atk, mgc. crt and the set of cards will not change.
+	g. Max level 50
+	
+4. Battle:
+	a. Before battle, the player will have to construct a deck of 5 creatures from all creatures owned by the player.
+	b. How the player construct the deck depends on his strategy
+	c. The deck can be constructed or changed anytime in menu page, but once you are in a battle you cannot change it (battle using the latest deck u changed to)
+	
+	d. Basic Rules:
+		i. Every round an amount of elixir is given to the player. In round 1 the player will have one elixir, round 2 the player will have 2 and so on (max until 10 elixir, even if round > 10)
+		ii. Elixir is used to perform actions in that round
+		iii. A random coin toss (1/2 probability) decides who starts the round
+		iv. At the start of the battle, five cards from the 25 cards (5 creatures) was randomly drawn to the player's hand. (not draw one card from one creature, draw from the pool of 25 cards, duplicated draw possible depending on card)
+		v. At round 1, the battlefield is empty, the starting player will have to choose a creature from his deck and deploy on the field. Deploying a creature costs one elixir.
+		vi. Since in round 1 the player will only have one elixir, after deploying he cant do anything else. To move to the next player's turn, the player should type 'next round'
+		vii. Then its the next player's turn, rules are the same.
+		viii. At round 2, the player can decide how he wishes to use the elixir he has (2 elixir), he can either deploy two more creatures onto the field or use a card with elixir cost <= 2 etc.
+		ix. All rounds will have same set of rules
+		x. A player loses when all of his creatures deployed on the field dies. (Even if he has undeployed creatures)
+	
+	e. In battle, the player can do three things:
+		1. Attack: - by typing "<your_creature_name> attack <opponent_creature_name>"
+			   - opponent's creature will be attacked and its hp will decrease by the atk damage of the attacking creature
+			   - total elixir of current player decrease by the elixir cost of the attacking creature
+			   - a card is drawn from the 5 cards of the attacking creature
+			   - there is a chance of crt (one of the stats) % that the attack will be a critical attack. Critical attack = attack + 35%
+		2. Deploy: - by typing "deploy <creature no.>"
+			   - adding the creature on battlefield
+			   - total elixir decrease by 1
+		3. Use Card: - by typing "use card <number> on <own_or_opponent's_creature>"
+		
+	f. Design of Battle screen (in our game ba):
+		 ____________________________________________________________________________
+		|                                                                            |
+		|                atk: 88          atk: 344         atk: 10                   |
+		|                mgc: 888         mgc: 109         mgc: 9999                 |
+		|                hp: ----- 176    hp: ----- 223    hp: ----- 10              |
+		|                v[ o w o ]v      "{ 0 _ o }"      |[ $ _ $ ]|               |
+		|                  NyanCat           Shrek            Najib                  |
+		|                                                                            |
+		|_____                                                                       |
+These are the 	|(*-*)| 3                                                                    |
+undeployed	|_____|                                                                      |
+creatures	|_____                                                                       |
+		|[=3=]| 5                                                                    |     	You can't see the opponent's card on hand or undeployed creatures
+		|_____|             Baymax           Happy          CryingMan                |
+		|                \[ 0 - 0 ]/      ~( ^ u ^ )~      ={ T w T }=               |		Maximum 10 cards on hand (display of card can be stacked???) unsure
+		|                cost: 4          cost: 2          cost: 3                   |
+		|                hp: ----- 154    hp: ----- 176    hp: ----- 333             |		You can type show <card_name> to show the description of card
+		|                atk: 165         atk: 175         atk: 86                   |		or type show creature <number> to show creature stats
+		|                mgc: 256         mgc: 300         mgc: 190                  |
+		|           ________  ________  ________  ________  ________                 |
+		|          |  (1)   ||  (2)   ||  (3)   ||  (4)   ||  (5)   |                |
+		|          |0 elixir||2 elixir||5 elixir||3 elixir||8 elixir|                |
+		|          |        ||        ||        ||        ||        |    ELIXIR:     |
+		|          |ultimate|| other  ||        ||        ||        |       8        |
+		|          |  wish  ||  names ||        ||        ||        |                |
+		|          |________||________||________||________||________|                |
+		|____________________________________________________________________________|
+		
+		ROUND N:
+		Your Move: Baymax attack NyanCat
+		 ____________________________________________________________________________
+		|                                                                            |
+		|               atk: 88           atk: 344          atk: 10                  |
+		|               mgc: 888          mgc: 109          mgc: 9999                |
+		|               hp: -.... 176-165 hp: ----- 223     hp: ----- 10             |
+		|               v[ o w o ]v       "{ 0 _ o }"       |[ $ _ $ ]|              |
+		|                 NyanCat            Shrek             Najib                 |
+		|                                                                            |
+		|_____          !!!ATTACK!!!                                                 |
+		|(*-*)| 3       \[ 0 - 0 ]/                                                  |
+		|_____|           Baymax                                                     |
+		|_____                                                                       |
+		|[=3=]| 5                                                                    |
+		|_____|                              Happy           CryingMan               |
+		|                                 ~( ^ u ^ )~       ={ T w T }=              |
+		|               cost: 4           cost: 2           cost: 3                  |
+		|               hp: ----- 154     hp: ----- 176     hp: ----- 333            |
+		|               atk: 165          atk: 175          atk: 86                  |
+		|               mgc: 256          mgc: 300          mgc: 190                 |
+		|           ________  ________  ________  ________  ________                 |
+		|          |  (1)   ||  (2)   ||  (3)   ||  (4)   ||  (5)   |                |
+		|          |0 elixir||2 elixir||5 elixir||3 elixir||8 elixir|                |
+		|          |        ||        ||        ||        ||        |    ELIXIR:     |
+		|          |ultimate|| other  ||        ||        ||        |      8-4       |
+		|          |  wish  ||  names ||        ||        ||        |                |
+		|          |________||________||________||________||________|                |
+		|____________________________________________________________________________|
+		
+		Baymax attacked NyanCat!!!
+ 		 ____________________________________________________________________________
+		|                                                                            |
+		|               atk: 88          atk: 344          atk: 10                   |
+		|               mgc: 888         mgc: 109          mgc: 9999                 |
+		|               hp: - 11         hp: ----- 223     hp: ----- 10              |
+		|               v[ o w o ]v       "{ 0 _ o }"       |[ $ _ $ ]|              |
+		|                 NyanCat            Shrek             Najib                 |
+		|                                                                            |
+		|_____                                                                       |
+		|(*-*)| 3                                                                    |
+		|_____|                                                                      |
+		|_____                                                                       |
+		|[=3=]| 5                                                                    |
+		|_____|            Baymax            Happy           CryingMan               |
+		|               \[ 0 - 0 ]/       ~( ^ u ^ )~       ={ T w T }=              |
+		|               cost: 4           cost: 2           cost: 3                  |
+		|               hp: ----- 154     hp: ----- 176     hp: ----- 333            |
+		|               atk: 165          atk: 175          atk: 86                  |
+		|               mgc: 256          mgc: 300          mgc: 190                 |
+		|           ________  ________  ________  ________  ________                 |
+		|          |  (1)   ||  (2)   ||  (3)   ||  (4)   ||  (5)   |                |
+		|          |0 elixir||2 elixir||5 elixir||3 elixir||8 elixir|                |
+		|          |        ||        ||        ||        ||        |    ELIXIR:     |
+		|          |ultimate|| other  ||        ||        ||        |       4        |
+		|          |  wish  ||  names ||        ||        ||        |                |
+		|          |________||________||________||________||________|                |
+		|____________________________________________________________________________|
+		
+		Your move: Use Card 2 on Shrek
+		 ____________________________________________________________________________
+		|                                                                            |
+		|               atk: 88          atk: 344          atk: 10                   |
+		|               mgc: 888         mgc: 109          mgc: 9999                 |
+		|               hp: - 11         hp: ----- 223-67  hp: ----- 10              |
+		|               v[ o w o ]v       "{ 0 _ o }"       |[ $ _ $ ]|              |
+		|                 NyanCat            Shrek             Najib                 |
+		|                                                                            |
+		|_____                                                                       |
+		|(*-*)| 3                  --- Card: Thundercloud ---                        |
+		|_____|                         played on Shrek                              |
+		|_____                                                                       |
+		|[=3=]| 5                                                                    |
+		|_____|            Baymax            Happy           CryingMan               |
+		|               \[ 0 - 0 ]/       ~( ^ u ^ )~       ={ T w T }=              |
+		|               cost: 4           cost: 2           cost: 3                  |
+		|               hp: ----- 154     hp: ----- 176     hp: ----- 333            |
+		|               atk: 165          atk: 175          atk: 86                  |
+		|               mgc: 256          mgc: 300          mgc: 190                 |
+		|           ________  ________  ________  ________  ________                 |
+		|          |  (1)   ||  (2)   ||  (3)   ||  (4)   ||  (5)   |                |
+		|          |0 elixir||2 elixir||5 elixir||3 elixir||8 elixir|                |
+		|          |        ||        ||        ||        ||        |    ELIXIR:     |
+		|          |ultimate|| other  ||        ||        ||        |      4-2       |
+		|          |  wish  ||  names ||        ||        ||        |                |
+		|          |________||________||________||________||________|                |
+		|____________________________________________________________________________|
+		
+		Card: Thundercloud
+		Description: 30% Direct Damage
+ 		 ____________________________________________________________________________
+		|                                                                            |
+		|               atk: 88          atk: 344          atk: 10                   |
+		|               mgc: 888         mgc: 109          mgc: 9999                 |
+		|               hp: - 11         hp: --- 156       hp: ----- 10              |
+		|               v[ o w o ]v       "{ 0 _ o }"       |[ $ _ $ ]|              |
+		|                 NyanCat            Shrek             Najib                 |
+		|                                                                            |
+		|_____                                                                       |
+		|(*-*)| 3                                                                    |
+		|_____|                                                                      |
+		|_____                                                                       |
+		|[=3=]| 5                                                                    |
+		|_____|            Baymax            Happy           CryingMan               |
+		|               \[ 0 - 0 ]/       ~( ^ u ^ )~       ={ T w T }=              |
+		|               cost: 4           cost: 2           cost: 3                  |
+		|               hp: ----- 154     hp: ----- 176     hp: ----- 333            |
+		|               atk: 165          atk: 175          atk: 86                  |
+		|               mgc: 256          mgc: 300          mgc: 190                 |
+		|           ________  ________  ________  ________  ________                 |
+		|          |  (1)   ||  (2)   ||  (3)   ||  (4)   ||  (5)   |                |
+		|          |0 elixir||2 elixir||5 elixir||3 elixir||8 elixir|                |
+		|          |        ||        ||        ||        ||        |    ELIXIR:     |
+		|          |ultimate|| other  ||        ||        ||        |       2        |
+		|          |  wish  ||  names ||        ||        ||        |                |
+		|          |________||________||________||________||________|                |
+		|____________________________________________________________________________|
+		
+		Your move: next round
+		------------------------------------------------------------------------------
+		PROCESSING...
+		Opponent's move: blabla...
+
+5. Card:
+	a. cards allows a lot of special effects to be used in battles hence increasing the depth of the game
+	b. different cards have different names and functions
+	c. card functions:
+		1. magic attack: play magic attack card on own creature to attack an opponent's creature using magic attack, the attacked creatured will lose mgc amount of hp, no cards drawn after magic attack
+		2. heal: heal by x% hp
+		3. add elixir: play card to add elixir, eg: a card costs 3 elixir, description: gain 2 elixir per opponent's creature on the field, if oppponent has three creatures on the field, u use 3 elixir to gain 6 elixir, net gain 3 elixir
+		4. atk up: increase atk by x%
+		5. atk down: decrease atk by x%
+		6. poison: poison by x%, meaning after every round, the creature poisoned will automatically decrease x% hp
+		7. direct damage: directly decrease x% hp
+		8. haste: decrease attack elixir cost by 1 for n rounds
+		9. shield: gain n shields to shield from any n number of attacks
+		10. thorns: reflect damage to the attacker, cannot reflect magic sttack
+		11. elixir sap: steal elixir away from opponent, eg: play 1 elixir sap card on creature a, use creature a to attack opponent creature b, then own elixir + 1, opponent elixir - 1
+		12. silence: play silence card on creature, and no card can be played anymore on the creature for n rounds
+		13. block card: prevents card to be drawn from the creature for n rounds
+		14. heroic: can only play on own creature, eg: creature a, b and c are on the field, if you play heroic card on creature a, in opponent's turn, the opponent can only attack creature a
+		15. defence up: damage received decrease by x%
+		16. blind: the creature blinded will miss its next attack
+		17. area effect: eg: a b c on the field, area heal played on b will heal a b and c, area heal played on a will heal a b, area effect affects adjacent creatures
+		18. remove: remove effects like remove poison, remove shield etc.
+	d. a card can have multipl functions and criterias for the fucntions to activate:
+		eg: - card A: 10% poison, if creature has thorns, attack down for 2 turns
+
+6. Creature types:
+	a. In cwk, the creature are splitted into 5 types, kinda like 属性
+	b. Cards are splitted into types too, a card of a type can only be found on creature of the same type
+	c. Type 1: Have very high atk value, low/average mgc value, cards found on them usually have atk up, haste
+	d. Type 2: Have very high mgc value, low atk value, cards found on them usually have magic attack, shield, elixir sap
+	e. Type 3: Average atk and mgc, cards found on them usually have poison, silence, block card, blind
+	f. Type 4: Higher hp, average atk and mgc, cards found on them usually have thorns, defence up, heroic
+	g. Type 5: Low hp, low atk, high mgc, cards found usually have heal, direct damage, remove
+	
+7. Player avatar:
+	a. The player can choose and change avatar for himself too. Each avatar will also have a set of five cards.
+	b. In battle, whenever a card is played, the elixir costs used to play the cards will accumulate (in cwk its called filling up 'floop' meter)
+	c. When the floop meter is full (accumulated card elixir exceeds for example 25), it will activate 'floop' and the player will draw a card from the player's avatar's 5 cards
+	d. These 5 cards usually provides insane values and can help you get an upper hand in the battle (eg: 0 elixir cost, area 3 shields and area thorns for 3 turns)
+
+Ya so this is basically how card wars kingdom works. It is really fun to play lol so i want to use this battle system in the project.
+But will be very chur haha after writing this Im considering if we still want to do the walking on the map part cuz this part is so complicated liao.
+I think this txt file will be quite messy cuz there are too many info to feed in haha for someone who have never seen this game before. So anything dun understand ask me.
+Or if anywhere can simplify tell me also cuz i think if really wanna make it like this its a little too complicated.
+ 
+
+
+
+
+
+
+
+
+
+	

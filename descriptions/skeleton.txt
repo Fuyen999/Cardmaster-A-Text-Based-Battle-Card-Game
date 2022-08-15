@@ -1,0 +1,245 @@
+1. Title screen:
+	int TitleScreen () { 
+		void PrintTitleScreen () { // take input from TitleScreen.txt and print out the screen }
+		// take in user's input
+		// if user's input is not a number / not in range, prompts user to enter a number
+		return user's input
+	}
+
+	eg: 
+	C:/users/Fuyen> ./game.exe
+	
+	---------------------------------------------------------------------
+	                 =====    =====    ==    ==    ======
+                        ||       ||   ||  ||\\  //||  ||
+                        ||  ===  ||===||  || \\// ||  ||====
+                        ||   ||  ||   ||  ||  ||  ||  ||
+                         =====   ||   ||  ||  ||  ||   ======
+        ---------------------------------------------------------------------
+				   
+				   1 > New Game
+				   2 > Continue
+				   3 > Options (?)
+
+	Please Enter a Number: Continue
+	Please enter 1, 2 or 3.
+	Please Enter a Number: 4
+	Please enter 1, 2 or 3.
+	Please Enter a Number 2
+	PROCESSING...
+
+2. Entering Game:
+	void Initializing () {
+		// If player choose new game, call NewGame()
+		// If player choose continue, call load()
+		// If player choose options, call options()
+	}
+
+3. Starting a New Game:
+	void NewGame () {
+		// input from Story1.txt, print out block by block to display story
+		// call Tutorial()
+	}
+
+4. Tutorial:
+	void Tutorial () {
+		// teach player how to move around, open menu page, battle etc.
+	}
+
+5. Character and equipments/items:
+	class character {
+		public:
+			getcurrenthp()
+			getfigure()
+			getname()
+			setname()
+			setfigure()
+			sethp()
+			setcurrenthp()
+			// member functions for other variables 
+		private:
+			string name
+			string figure
+			const (?) maxhp = 
+			int currenthp = 
+			// other variables
+	}
+
+	class item {
+		public:
+		private: 
+			still dk how to design this class hmm
+	}
+
+	- maybe can create a stats class
+	class stats {
+		public:
+		private:
+			int hp
+			int atk
+			int mgc
+			int luck
+			...
+	}
+
+6. Walking around
+	int/double PlayersLocation () {
+		// take in user's input "wasd" or junction characters
+		// return an int/double (coordinates array?) that represents the location of the player
+	}
+
+	string ChangeMap (full map, player's location) {
+		// Change player position / block of map depending on where the player's location is
+		// return a 25 X 65 block of the full map
+	}
+
+	void PrintMap (block of map) {
+		// Print the 25 X 65 block of the map returned by ChangeMap()
+		// The character should be printed in colour text / bolded text
+	}
+
+	bool Encounter (player's location) {
+		// determine if the player will encounter something to be battled with (randomly?)
+		// return true or false
+		// probability of encounter somehow controlled
+	}
+	
+	eg:
+
+                                65 columns (Os)
+
+	OOOOOOOOOOO|    |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOO|    |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOO|    |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOO|  G                                    |OOOOOOOOOOOOO
+	OOOOOOOOOOO|__________________________________  F  |OOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOO|   LIBRARY   |OOOOOOOO|                   E  |OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOO|  D   ________________|OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOO|     |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO     25 rows
+	OOOOO|_____   _____|OOOOOOOO|     |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOO| |OOOOOOOOOOOOOO|     |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO    
+	(3.3)       A                  C  |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	_________________ B ______________|OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO|H_______________  I|OOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+	Your move: ABCD
+
+	OOOOOOOOOOO|    |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOO|    |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOO|    |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOO|  G                                    |OOOOOOOOOOOOO
+	OOOOOOOOOOO|__________________________________  F  |OOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOOOOOOOOOOOOOOOOOOOO|    |OOOOOOOOOOOOO
+	OOOOO|   LIBRARY   |OOOOOOOO|                   E  |OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOO|(3.3) ________________|OOOOOOOOOOOOO
+	OOOOO|             |OOOOOOOO|     |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOO|_____   _____|OOOOOOOO|     |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOO| |OOOOOOOOOOOOOO|     |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	            A                  C  |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	_________________ B ______________|OOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOO|H_______________  I|OOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOO
+	OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO| |OOOOOOOOOOOOOOOOOOOOOOOOOOO
+
+	Your move: _
+
+7. Battle:
+	- to be determined still thinking
+
+8. Functions for Specific Events Of The Game:
+	eg:
+	bool MissionBefore1stBoss (player's position) {
+		// Activates when player walks to a town in Map A
+		// some story telling
+		// player given some mission (eg: go around the town to get information and items)
+		// return true if the mission and its corresponding sequence of events completed
+	}
+
+	bool 1stBossSequence (player's position) {
+		// activate if player reaches a certain position in the map and with MissionBefore1stBoss() completed
+		// player reaches the point where he chooses to go into the forest near the town to face the 1st boss
+		// prompts player to confirm he wants to proceed with the battle
+		// start boss fight story sequence
+		// commence battle mode with the boss character
+		// return true if boss defeated (?)
+	}
+
+	- All events are represented in different functions
+	- Arrange the sequence of these functions in main function to make the full story. 
+
+9. Menu Page:
+	eg:
+
+	**************************
+	          Menu
+	**************************
+	Stats: 	level 87
+		hp  ------------ 666
+	       	other stats ...
+	
+	1. Equipments
+	2. bla
+	3. bla
+	4. Info
+
+	void MenuPage () {
+		// print menu title
+		// print other things to be printed
+		// take in user's input 1, 2, 3, 4 and navigate through the menu
+	}
+
+	class menu {
+		public:
+		private:
+			characters ArrayOfOwnedCharacters
+			stats PlayersStats
+			item PlayersItems
+	}
+
+10. Save:
+	void save (string name_of_file_to_be_save_to) { 
+		// take in all variable values, output to save.txt
+		// take in name of file
+		// if file exists, ask player if he wishes to overwrite data
+		// only can save when player is at some map (not in battle mode)
+	}
+
+	eg:
+	Your move: save
+	---------------------------------------------------------------------------
+	What file do you want to save you progress to? Fuyen's Progress
+	---------------------------------------------------------------------------
+	"Fuyen's Progress.txt" exists, do you want to overwrite the data? (y/n) y
+	---------------------------------------------------------------------------
+	SAVING ...
+	Save completed!
+	---------------------------------------------------------------------------
+	Do you want to quit? (y/n) y
+	
+11. Load:
+	void load (string NameOfFileToBeLoadedFrom) {
+		// load from the file
+	}
+	
+
